@@ -19319,7 +19319,7 @@ require("startbootstrap-freelancer/vendor/jquery-easing/jquery.easing.min");
 require("startbootstrap-freelancer/vendor/bootstrap/js/bootstrap.bundle.min");
 
 var name = 'world';
-console.log("Hello ".concat(name, " 2"));
+console.log("Hello ".concat(name));
 },{"@fortawesome/fontawesome-free/js/fontawesome.min":"node_modules/@fortawesome/fontawesome-free/js/fontawesome.min.js","startbootstrap-freelancer/vendor/jquery/jquery.min":"node_modules/startbootstrap-freelancer/vendor/jquery/jquery.min.js","startbootstrap-freelancer/vendor/jquery-easing/jquery.easing.min":"node_modules/startbootstrap-freelancer/vendor/jquery-easing/jquery.easing.min.js","startbootstrap-freelancer/vendor/bootstrap/js/bootstrap.bundle.min":"node_modules/startbootstrap-freelancer/vendor/bootstrap/js/bootstrap.bundle.min.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -19348,7 +19348,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42701" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37025" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
