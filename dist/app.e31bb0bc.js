@@ -19307,7 +19307,39 @@ var global = arguments[3];
     value: !0
   });
 });
-},{"jquery":"node_modules/jquery/dist/jquery.js"}],"index.js":[function(require,module,exports) {
+},{"jquery":"node_modules/jquery/dist/jquery.js"}],"data/data.js":[function(require,module,exports) {
+module.exports = {
+  families: [{
+    id: 1,
+    name: 'Airabella',
+    image: 'assets/airabella-logo.png',
+    ownedLands: ['Castriñas', 'Castrobeloso', 'Pozo do ovo', 'Chandortos']
+  }, {
+    id: 2,
+    name: 'Achá',
+    image: 'assets/acha-logo.png',
+    ownedLands: ['Xeixo', 'Pandelo', 'Destriz', 'Mataboa']
+  }, {
+    id: 3,
+    name: 'Arribada',
+    image: 'assets/arribada-logo.png',
+    ownedLands: ['Mindaveiga', 'Portelo da moa', 'A ponte', 'Baliñas']
+  }, {
+    id: 4,
+    name: 'Fontela',
+    image: 'assets/fontela-logo.png',
+    ownedLands: ['Foxo', 'Pumbar', 'Xinsuas', 'Veigarrozada']
+  }]
+};
+},{}],"assets/airabella-logo.png":[function(require,module,exports) {
+module.exports = "/airabella-logo.a41609b2.png";
+},{}],"assets/acha-logo.png":[function(require,module,exports) {
+module.exports = "/acha-logo.a5cead75.png";
+},{}],"assets/arribada-logo.png":[function(require,module,exports) {
+module.exports = "/arribada-logo.3eb494db.png";
+},{}],"assets/fontela-logo.png":[function(require,module,exports) {
+module.exports = "/fontela-logo.578a5373.png";
+},{}],"index.js":[function(require,module,exports) {
 "use strict";
 
 require("@fortawesome/fontawesome-free/js/fontawesome.min");
@@ -19318,9 +19350,50 @@ require("startbootstrap-freelancer/vendor/jquery-easing/jquery.easing.min");
 
 require("startbootstrap-freelancer/vendor/bootstrap/js/bootstrap.bundle.min");
 
-var name = 'world';
-console.log("Hello ".concat(name));
-},{"@fortawesome/fontawesome-free/js/fontawesome.min":"node_modules/@fortawesome/fontawesome-free/js/fontawesome.min.js","startbootstrap-freelancer/vendor/jquery/jquery.min":"node_modules/startbootstrap-freelancer/vendor/jquery/jquery.min.js","startbootstrap-freelancer/vendor/jquery-easing/jquery.easing.min":"node_modules/startbootstrap-freelancer/vendor/jquery-easing/jquery.easing.min.js","startbootstrap-freelancer/vendor/bootstrap/js/bootstrap.bundle.min":"node_modules/startbootstrap-freelancer/vendor/bootstrap/js/bootstrap.bundle.min.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+var _data = _interopRequireDefault(require("./data/data"));
+
+require("./assets/airabella-logo.png");
+
+require("./assets/acha-logo.png");
+
+require("./assets/arribada-logo.png");
+
+require("./assets/fontela-logo.png");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function printFamilies() {
+  _data.default.families.forEach(function (family) {
+    var familiesRootDom = document.getElementById('families');
+    familiesRootDom.appendChild(createFamilyHtml(family));
+  });
+}
+
+function createFamilyHtml(familyData) {
+  var column = document.createElement('div');
+  column.setAttribute('class', 'col-md-6 col-lg-4');
+  var portfolio = document.createElement('div');
+  portfolio.setAttribute('class', 'portfolio-item mx-auto');
+  var image = document.createElement('img');
+  image.setAttribute('class', 'img-fluid');
+  image.setAttribute('src', require('./' + familyData.image));
+  image.setAttribute('alt', 'Family image');
+  portfolio.appendChild(image);
+  var portfolioItemCaption = document.createElement('div');
+  portfolioItemCaption.setAttribute('class', 'portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100');
+  var portfolioItemCaptionContent = document.createElement('div');
+  portfolioItemCaptionContent.setAttribute('class', 'portfolio-item-caption-content text-center text-white');
+  var icon = document.createElement('i');
+  icon.setAttribute('class', 'fas fa-link fa-3x');
+  portfolioItemCaptionContent.appendChild(icon);
+  portfolioItemCaption.appendChild(portfolioItemCaptionContent);
+  portfolio.appendChild(portfolioItemCaption);
+  column.appendChild(portfolio);
+  return column;
+}
+
+printFamilies();
+},{"@fortawesome/fontawesome-free/js/fontawesome.min":"node_modules/@fortawesome/fontawesome-free/js/fontawesome.min.js","startbootstrap-freelancer/vendor/jquery/jquery.min":"node_modules/startbootstrap-freelancer/vendor/jquery/jquery.min.js","startbootstrap-freelancer/vendor/jquery-easing/jquery.easing.min":"node_modules/startbootstrap-freelancer/vendor/jquery-easing/jquery.easing.min.js","startbootstrap-freelancer/vendor/bootstrap/js/bootstrap.bundle.min":"node_modules/startbootstrap-freelancer/vendor/bootstrap/js/bootstrap.bundle.min.js","./data/data":"data/data.js","./assets/airabella-logo.png":"assets/airabella-logo.png","./assets/acha-logo.png":"assets/acha-logo.png","./assets/arribada-logo.png":"assets/arribada-logo.png","./assets/fontela-logo.png":"assets/fontela-logo.png"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -19348,7 +19421,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37025" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41363" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
