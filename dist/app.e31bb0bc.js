@@ -19339,6 +19339,8 @@ module.exports = "/acha-logo.a5cead75.png";
 module.exports = "/arribada-logo.3eb494db.png";
 },{}],"assets/fontela-logo.png":[function(require,module,exports) {
 module.exports = "/fontela-logo.578a5373.png";
+},{}],"assets/land.jpg":[function(require,module,exports) {
+module.exports = "/land.416e7c6e.jpg";
 },{}],"index.js":[function(require,module,exports) {
 "use strict";
 
@@ -19369,6 +19371,85 @@ function printFamilies() {
   });
 }
 
+function printFamily(familyId) {
+  var family = _data.default.families.filter(function (family) {
+    return family.id === familyId;
+  })[0];
+
+  var familiesRootDom = document.getElementById('families');
+  changeTitle(family.name);
+  family.ownedLands.forEach(function (land) {
+    familiesRootDom.appendChild(createLandHtml(land));
+  });
+}
+
+function printLand(landName) {
+  changeTitle(landName);
+  var landRootDOM = document.getElementById('families');
+  var container = document.createElement('div');
+  container.setAttribute('class', 'container');
+  var row = document.createElement('div');
+  row.setAttribute('class', 'row');
+  var imageDiv = document.createElement('div');
+  imageDiv.setAttribute('class', 'col-md-8');
+  var img = document.createElement('img');
+  img.setAttribute('class', 'img-fluid');
+  img.setAttribute('src', require('./assets/land.jpg'));
+  imageDiv.appendChild(img);
+  var descDiv = document.createElement('div');
+  descDiv.setAttribute('class', 'col-md-4');
+  var title = document.createElement('h3');
+  title.setAttribute('class', 'my-3');
+  title.innerText = 'Descripción';
+  var pharagraph = document.createElement('p');
+  pharagraph.innerText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida ' + 'pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, ' + 'justo eu convallis placerat, felis enim.';
+  descDiv.appendChild(title);
+  descDiv.appendChild(pharagraph);
+  row.appendChild(imageDiv);
+  row.appendChild(descDiv);
+  container.appendChild(row);
+  landRootDOM.appendChild(container);
+}
+
+function changeTitle(newTitle) {
+  var title = document.getElementById('title');
+  title.innerText = newTitle;
+}
+
+function getUrlVars() {
+  var vars = {};
+  var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+    vars[key] = value;
+  });
+  return vars;
+}
+
+function createLandHtml(land) {
+  var column = document.createElement('div');
+  column.setAttribute('class', 'col-md-6 col-lg-4');
+  var portfolio = document.createElement('div');
+  portfolio.setAttribute('class', 'portfolio-item mx-auto');
+  var image = document.createElement('img');
+  image.setAttribute('class', 'img-fluid');
+  image.setAttribute('src', require('./assets/land.jpg'));
+  image.setAttribute('alt', 'Family image');
+  portfolio.appendChild(image);
+  var link = document.createElement('a');
+  link.setAttribute('href', '?land=' + encodeURI(land));
+  var portfolioItemCaption = document.createElement('div');
+  portfolioItemCaption.setAttribute('class', 'portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100');
+  var portfolioItemCaptionContent = document.createElement('div');
+  portfolioItemCaptionContent.setAttribute('class', 'portfolio-item-caption-content text-center text-white');
+  var icon = document.createElement('i');
+  icon.setAttribute('class', 'fas fa-link fa-3x');
+  portfolioItemCaptionContent.appendChild(icon);
+  portfolioItemCaption.appendChild(portfolioItemCaptionContent);
+  link.appendChild(portfolioItemCaption);
+  portfolio.appendChild(link);
+  column.appendChild(portfolio);
+  return column;
+}
+
 function createFamilyHtml(familyData) {
   var column = document.createElement('div');
   column.setAttribute('class', 'col-md-6 col-lg-4');
@@ -19379,6 +19460,8 @@ function createFamilyHtml(familyData) {
   image.setAttribute('src', require('./' + familyData.image));
   image.setAttribute('alt', 'Family image');
   portfolio.appendChild(image);
+  var link = document.createElement('a');
+  link.setAttribute('href', '?family=' + familyData.id);
   var portfolioItemCaption = document.createElement('div');
   portfolioItemCaption.setAttribute('class', 'portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100');
   var portfolioItemCaptionContent = document.createElement('div');
@@ -19387,13 +19470,28 @@ function createFamilyHtml(familyData) {
   icon.setAttribute('class', 'fas fa-link fa-3x');
   portfolioItemCaptionContent.appendChild(icon);
   portfolioItemCaption.appendChild(portfolioItemCaptionContent);
-  portfolio.appendChild(portfolioItemCaption);
+  link.appendChild(portfolioItemCaption);
+  portfolio.appendChild(link);
   column.appendChild(portfolio);
   return column;
 }
 
+var urlVars = getUrlVars();
+
+if (urlVars.family) {
+  var familyId = parseInt(urlVars.family);
+  printFamily(familyId);
+  return;
+}
+
+if (urlVars.land) {
+  var landName = decodeURI(urlVars.land);
+  printLand(landName);
+  return;
+}
+
 printFamilies();
-},{"@fortawesome/fontawesome-free/js/fontawesome.min":"node_modules/@fortawesome/fontawesome-free/js/fontawesome.min.js","startbootstrap-freelancer/vendor/jquery/jquery.min":"node_modules/startbootstrap-freelancer/vendor/jquery/jquery.min.js","startbootstrap-freelancer/vendor/jquery-easing/jquery.easing.min":"node_modules/startbootstrap-freelancer/vendor/jquery-easing/jquery.easing.min.js","startbootstrap-freelancer/vendor/bootstrap/js/bootstrap.bundle.min":"node_modules/startbootstrap-freelancer/vendor/bootstrap/js/bootstrap.bundle.min.js","./data/data":"data/data.js","./assets/airabella-logo.png":"assets/airabella-logo.png","./assets/acha-logo.png":"assets/acha-logo.png","./assets/arribada-logo.png":"assets/arribada-logo.png","./assets/fontela-logo.png":"assets/fontela-logo.png"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"@fortawesome/fontawesome-free/js/fontawesome.min":"node_modules/@fortawesome/fontawesome-free/js/fontawesome.min.js","startbootstrap-freelancer/vendor/jquery/jquery.min":"node_modules/startbootstrap-freelancer/vendor/jquery/jquery.min.js","startbootstrap-freelancer/vendor/jquery-easing/jquery.easing.min":"node_modules/startbootstrap-freelancer/vendor/jquery-easing/jquery.easing.min.js","startbootstrap-freelancer/vendor/bootstrap/js/bootstrap.bundle.min":"node_modules/startbootstrap-freelancer/vendor/bootstrap/js/bootstrap.bundle.min.js","./data/data":"data/data.js","./assets/airabella-logo.png":"assets/airabella-logo.png","./assets/acha-logo.png":"assets/acha-logo.png","./assets/arribada-logo.png":"assets/arribada-logo.png","./assets/fontela-logo.png":"assets/fontela-logo.png","./assets/land.jpg":"assets/land.jpg"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -19421,7 +19519,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41363" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "40413" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
