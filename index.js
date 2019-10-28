@@ -144,13 +144,9 @@ const urlVars = getUrlVars();
 if (urlVars.family) {
     const familyId = parseInt(urlVars.family);
     printFamily(familyId);
-    return;
-}
-
-if (urlVars.land) {
+} else if (urlVars.land) {
     const landName = decodeURI(urlVars.land);
     printLand(landName);
-    return;
+} else {
+    printFamilies();
 }
-
-printFamilies();
