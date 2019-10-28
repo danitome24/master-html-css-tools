@@ -84,7 +84,10 @@ function createLandHtml(land) {
     image.setAttribute('class', 'img-fluid');
     image.setAttribute('src', require('./assets/land.jpg'));
     image.setAttribute('alt', 'Family image');
+    const landName = document.createElement('p');
+    landName.innerText = land;
     portfolio.appendChild(image);
+    portfolio.appendChild(landName);
 
     const link = document.createElement('a');
     link.setAttribute('href', '?land=' + encodeURI(land));

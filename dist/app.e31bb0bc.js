@@ -19433,7 +19433,10 @@ function createLandHtml(land) {
   image.setAttribute('class', 'img-fluid');
   image.setAttribute('src', require('./assets/land.jpg'));
   image.setAttribute('alt', 'Family image');
+  var landName = document.createElement('p');
+  landName.innerText = land;
   portfolio.appendChild(image);
+  portfolio.appendChild(landName);
   var link = document.createElement('a');
   link.setAttribute('href', '?land=' + encodeURI(land));
   var portfolioItemCaption = document.createElement('div');
