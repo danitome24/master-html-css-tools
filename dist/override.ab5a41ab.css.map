@@ -1,0 +1,1 @@
+{"version":3,"sources":["override.css"],"names":[],"mappings":"AAAA;IACI,cAAc;IACd,iBAAiB;AACrB;;AAEA;IACI,yBAAyB;IACzB,SAAS;AACb","file":"override.ab5a41ab.css","sourceRoot":"..","sourcesContent":["#mainNav {\n    padding-top: 0;\n    padding-bottom: 0;\n}\n\n.list-group-item {\n    background-color: inherit;\n    border: 0;\n}\n"]}
