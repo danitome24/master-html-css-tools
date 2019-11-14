@@ -8,15 +8,14 @@ import './assets/acha-logo.png';
 import './assets/arribada-logo.png';
 import './assets/fontela-logo.png';
 
+/*
+    Printers
+ */
 function printFamilies() {
     data.families.forEach(family => {
         const familiesRootDom = document.getElementById('families');
         familiesRootDom.appendChild(createFamilyHtml(family));
     });
-}
-
-function getFamilyName(familyId) {
-    return data.families.filter(family => family.id === familyId)[0].name;
 }
 
 function printFamily(familyId) {
@@ -109,45 +108,6 @@ function printLand(landName, familyId) {
     landRootDOM.appendChild(container);
 }
 
-function getSimilarLandsByFamily(currentLand, familyId) {
-    const family = data.families.filter(family => family.id === familyId)[0];
-
-    return family.ownedLands.filter(land => land !== currentLand);
-}
-
-function getCarouselButton(type) {
-    const carouselPreviousButton = document.createElement('a');
-    carouselPreviousButton.setAttribute('class', 'carousel-control-' + type);
-    carouselPreviousButton.setAttribute('role', 'button');
-    carouselPreviousButton.setAttribute('href', '#otherLandsCarousel');
-    carouselPreviousButton.setAttribute('data-slide', type);
-
-    const carouselPreviousButtonPrev = document.createElement('span');
-    carouselPreviousButtonPrev.setAttribute('class', 'carousel-control-' + type + '-icon');
-    carouselPreviousButtonPrev.setAttribute('aria-hidden', 'true');
-    carouselPreviousButton.appendChild(carouselPreviousButtonPrev);
-
-    const carouselButtonSpan = document.createElement('span');
-    carouselButtonSpan.setAttribute('class', 'sr-only');
-    carouselButtonSpan.innerHTML = 'Next';
-    carouselPreviousButton.appendChild(carouselButtonSpan);
-
-    return carouselPreviousButton;
-}
-
-function changeTitle(newTitle) {
-    const title = document.getElementById('title');
-    title.innerText = newTitle;
-}
-
-function getUrlVars() {
-    let vars = {};
-    const parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
-        vars[key] = value;
-    });
-    return vars;
-}
-
 function createLandHtml(land, familyId) {
     const column = document.createElement('div');
     column.setAttribute('class', 'col-md-6 col-lg-4');
@@ -213,8 +173,38 @@ function createFamilyHtml(familyData) {
     return column;
 }
 
-const urlVars = getUrlVars();
 
+/*
+    Extract data
+ */
+function getSimilarLandsByFamily(currentLand, familyId) {
+    const family = data.families.filter(family => family.id === familyId)[0];
+
+    return family.ownedLands.filter(land => land !== currentLand);
+}
+
+function getFamilyName(familyId) {
+    return data.families.filter(family => family.id === familyId)[0].name;
+}
+
+/*
+    Utils
+ */
+
+function changeTitle(newTitle) {
+    const title = document.getElementById('title');
+    title.innerText = newTitle;
+}
+
+function getUrlVars() {
+    let vars = {};
+    const parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+
+const urlVars = getUrlVars();
 if (urlVars.family && !urlVars.land) {
     const familyId = parseInt(urlVars.family);
     printFamily(familyId);
