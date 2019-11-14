@@ -15,17 +15,21 @@ function printFamilies() {
     });
 }
 
+function getFamilyName(familyId) {
+    return data.families.filter(family => family.id === familyId)[0].name;
+}
+
 function printFamily(familyId) {
     const family = data.families.filter(family => family.id === familyId)[0];
     const familiesRootDom = document.getElementById('families');
-    changeTitle(family.name);
+    changeTitle('Tierras de ' + family.name);
 
     family.ownedLands.forEach(land => {
-        familiesRootDom.appendChild(createLandHtml(land));
+        familiesRootDom.appendChild(createLandHtml(land, familyId));
     });
 }
 
-function printLand(landName) {
+function printLand(landName, familyId) {
     changeTitle(landName);
     const landRootDOM = document.getElementById('families');
     const container = document.createElement('div');
@@ -58,7 +62,77 @@ function printLand(landName) {
     row.appendChild(descDiv);
     container.appendChild(row);
 
+    container.appendChild(document.createElement('hr'));
+    const otherSimilarLandsTitleDiv = document.createElement('div');
+    otherSimilarLandsTitleDiv.setAttribute('class', 'my-4');
+    const otherSimilarLandsTitle = document.createElement('h3');
+    otherSimilarLandsTitle.innerText = 'Otras tierras de ' + getFamilyName(familyId);
+    otherSimilarLandsTitle.setAttribute('class', 'text-uppercase text-secondary');
+    otherSimilarLandsTitleDiv.appendChild(otherSimilarLandsTitle);
+
+    const carousel = document.createElement('div');
+    carousel.setAttribute('id', 'otherLandsCarousel');
+    carousel.setAttribute('class', 'mt-2 carousel slide');
+    carousel.setAttribute('data-ride', 'carousel');
+
+    const similarLands = getSimilarLandsByFamily(landName, familyId);
+
+    const carouselInner = document.createElement('div');
+    carouselInner.setAttribute('class', 'carousel-inner');
+    const carouselItem = document.createElement('div');
+    carouselItem.setAttribute('class', 'carousel-item active');
+
+    const carouselRow = document.createElement('div');
+    carouselRow.setAttribute('class', 'row');
+    similarLands.forEach(similarLand => {
+        const carouselCol = document.createElement('div');
+        carouselCol.setAttribute('class', 'col-md-4');
+        const carouselLandLink = document.createElement('a');
+        carouselLandLink.setAttribute('href', '?land=' + similarLand + '&family=' + familyId);
+        const carouselLandName = document.createElement('p');
+        carouselLandName.innerText = similarLand;
+        const carouselImage = document.createElement('img');
+        carouselLandLink.appendChild(carouselImage);
+        carouselLandLink.appendChild(carouselLandName);
+        carouselImage.setAttribute('src', require('./assets/land.jpg'));
+        carouselImage.setAttribute('alt', similarLand);
+        carouselImage.setAttribute('style', 'max-width: 100%');
+        carouselCol.appendChild(carouselLandLink);
+        carouselRow.appendChild(carouselCol);
+    });
+    carouselItem.appendChild(carouselRow);
+    carouselInner.appendChild(carouselItem);
+    carousel.appendChild(carouselInner);
+    container.appendChild(otherSimilarLandsTitleDiv);
+    container.appendChild(carousel);
+
     landRootDOM.appendChild(container);
+}
+
+function getSimilarLandsByFamily(currentLand, familyId) {
+    const family = data.families.filter(family => family.id === familyId)[0];
+
+    return family.ownedLands.filter(land => land !== currentLand);
+}
+
+function getCarouselButton(type) {
+    const carouselPreviousButton = document.createElement('a');
+    carouselPreviousButton.setAttribute('class', 'carousel-control-' + type);
+    carouselPreviousButton.setAttribute('role', 'button');
+    carouselPreviousButton.setAttribute('href', '#otherLandsCarousel');
+    carouselPreviousButton.setAttribute('data-slide', type);
+
+    const carouselPreviousButtonPrev = document.createElement('span');
+    carouselPreviousButtonPrev.setAttribute('class', 'carousel-control-' + type + '-icon');
+    carouselPreviousButtonPrev.setAttribute('aria-hidden', 'true');
+    carouselPreviousButton.appendChild(carouselPreviousButtonPrev);
+
+    const carouselButtonSpan = document.createElement('span');
+    carouselButtonSpan.setAttribute('class', 'sr-only');
+    carouselButtonSpan.innerHTML = 'Next';
+    carouselPreviousButton.appendChild(carouselButtonSpan);
+
+    return carouselPreviousButton;
 }
 
 function changeTitle(newTitle) {
@@ -74,7 +148,7 @@ function getUrlVars() {
     return vars;
 }
 
-function createLandHtml(land) {
+function createLandHtml(land, familyId) {
     const column = document.createElement('div');
     column.setAttribute('class', 'col-md-6 col-lg-4');
 
@@ -90,7 +164,7 @@ function createLandHtml(land) {
     portfolio.appendChild(landName);
 
     const link = document.createElement('a');
-    link.setAttribute('href', '?land=' + encodeURI(land));
+    link.setAttribute('href', '?land=' + encodeURI(land) + '&family=' + familyId);
     const portfolioItemCaption = document.createElement('div');
     portfolioItemCaption.setAttribute('class', 'portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100');
 
@@ -141,12 +215,13 @@ function createFamilyHtml(familyData) {
 
 const urlVars = getUrlVars();
 
-if (urlVars.family) {
+if (urlVars.family && !urlVars.land) {
     const familyId = parseInt(urlVars.family);
     printFamily(familyId);
 } else if (urlVars.land) {
     const landName = decodeURI(urlVars.land);
-    printLand(landName);
+    const familyId = parseInt(urlVars.family);
+    printLand(landName, familyId);
 } else {
     printFamilies();
 }

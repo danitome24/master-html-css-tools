@@ -19371,19 +19371,25 @@ function printFamilies() {
   });
 }
 
+function getFamilyName(familyId) {
+  return _data.default.families.filter(function (family) {
+    return family.id === familyId;
+  })[0].name;
+}
+
 function printFamily(familyId) {
   var family = _data.default.families.filter(function (family) {
     return family.id === familyId;
   })[0];
 
   var familiesRootDom = document.getElementById('families');
-  changeTitle(family.name);
+  changeTitle('Tierras de ' + family.name);
   family.ownedLands.forEach(function (land) {
-    familiesRootDom.appendChild(createLandHtml(land));
+    familiesRootDom.appendChild(createLandHtml(land, familyId));
   });
 }
 
-function printLand(landName) {
+function printLand(landName, familyId) {
   changeTitle(landName);
   var landRootDOM = document.getElementById('families');
   var container = document.createElement('div');
@@ -19408,7 +19414,73 @@ function printLand(landName) {
   row.appendChild(imageDiv);
   row.appendChild(descDiv);
   container.appendChild(row);
+  container.appendChild(document.createElement('hr'));
+  var otherSimilarLandsTitleDiv = document.createElement('div');
+  otherSimilarLandsTitleDiv.setAttribute('class', 'my-4');
+  var otherSimilarLandsTitle = document.createElement('h3');
+  otherSimilarLandsTitle.innerText = 'Otras tierras de ' + getFamilyName(familyId);
+  otherSimilarLandsTitle.setAttribute('class', 'text-uppercase text-secondary');
+  otherSimilarLandsTitleDiv.appendChild(otherSimilarLandsTitle);
+  var carousel = document.createElement('div');
+  carousel.setAttribute('id', 'otherLandsCarousel');
+  carousel.setAttribute('class', 'mt-2 carousel slide');
+  carousel.setAttribute('data-ride', 'carousel');
+  var similarLands = getSimilarLandsByFamily(landName, familyId);
+  var carouselInner = document.createElement('div');
+  carouselInner.setAttribute('class', 'carousel-inner');
+  var carouselItem = document.createElement('div');
+  carouselItem.setAttribute('class', 'carousel-item active');
+  var carouselRow = document.createElement('div');
+  carouselRow.setAttribute('class', 'row');
+  similarLands.forEach(function (similarLand) {
+    var carouselCol = document.createElement('div');
+    carouselCol.setAttribute('class', 'col-md-4');
+    var carouselLandLink = document.createElement('a');
+    carouselLandLink.setAttribute('href', '?land=' + similarLand + '&family=' + familyId);
+    var carouselLandName = document.createElement('p');
+    carouselLandName.innerText = similarLand;
+    var carouselImage = document.createElement('img');
+    carouselLandLink.appendChild(carouselImage);
+    carouselLandLink.appendChild(carouselLandName);
+    carouselImage.setAttribute('src', require('./assets/land.jpg'));
+    carouselImage.setAttribute('alt', similarLand);
+    carouselImage.setAttribute('style', 'max-width: 100%');
+    carouselCol.appendChild(carouselLandLink);
+    carouselRow.appendChild(carouselCol);
+  });
+  carouselItem.appendChild(carouselRow);
+  carouselInner.appendChild(carouselItem);
+  carousel.appendChild(carouselInner);
+  container.appendChild(otherSimilarLandsTitleDiv);
+  container.appendChild(carousel);
   landRootDOM.appendChild(container);
+}
+
+function getSimilarLandsByFamily(currentLand, familyId) {
+  var family = _data.default.families.filter(function (family) {
+    return family.id === familyId;
+  })[0];
+
+  return family.ownedLands.filter(function (land) {
+    return land !== currentLand;
+  });
+}
+
+function getCarouselButton(type) {
+  var carouselPreviousButton = document.createElement('a');
+  carouselPreviousButton.setAttribute('class', 'carousel-control-' + type);
+  carouselPreviousButton.setAttribute('role', 'button');
+  carouselPreviousButton.setAttribute('href', '#otherLandsCarousel');
+  carouselPreviousButton.setAttribute('data-slide', type);
+  var carouselPreviousButtonPrev = document.createElement('span');
+  carouselPreviousButtonPrev.setAttribute('class', 'carousel-control-' + type + '-icon');
+  carouselPreviousButtonPrev.setAttribute('aria-hidden', 'true');
+  carouselPreviousButton.appendChild(carouselPreviousButtonPrev);
+  var carouselButtonSpan = document.createElement('span');
+  carouselButtonSpan.setAttribute('class', 'sr-only');
+  carouselButtonSpan.innerHTML = 'Next';
+  carouselPreviousButton.appendChild(carouselButtonSpan);
+  return carouselPreviousButton;
 }
 
 function changeTitle(newTitle) {
@@ -19424,7 +19496,7 @@ function getUrlVars() {
   return vars;
 }
 
-function createLandHtml(land) {
+function createLandHtml(land, familyId) {
   var column = document.createElement('div');
   column.setAttribute('class', 'col-md-6 col-lg-4');
   var portfolio = document.createElement('div');
@@ -19438,7 +19510,7 @@ function createLandHtml(land) {
   portfolio.appendChild(image);
   portfolio.appendChild(landName);
   var link = document.createElement('a');
-  link.setAttribute('href', '?land=' + encodeURI(land));
+  link.setAttribute('href', '?land=' + encodeURI(land) + '&family=' + familyId);
   var portfolioItemCaption = document.createElement('div');
   portfolioItemCaption.setAttribute('class', 'portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100');
   var portfolioItemCaptionContent = document.createElement('div');
@@ -19481,12 +19553,15 @@ function createFamilyHtml(familyData) {
 
 var urlVars = getUrlVars();
 
-if (urlVars.family) {
+if (urlVars.family && !urlVars.land) {
   var familyId = parseInt(urlVars.family);
   printFamily(familyId);
 } else if (urlVars.land) {
   var landName = decodeURI(urlVars.land);
-  printLand(landName);
+
+  var _familyId = parseInt(urlVars.family);
+
+  printLand(landName, _familyId);
 } else {
   printFamilies();
 }
@@ -19518,7 +19593,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49588" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55285" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
