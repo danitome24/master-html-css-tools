@@ -21,7 +21,6 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.11.2",
-    "data": "^0.6.1",
     "jquery": "^3.4.1",
     "startbootstrap-freelancer": "^5.1.3"
   }
