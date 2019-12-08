@@ -3,6 +3,9 @@ import 'startbootstrap-freelancer/vendor/jquery/jquery.min';
 import 'startbootstrap-freelancer/vendor/jquery-easing/jquery.easing.min';
 import 'startbootstrap-freelancer/vendor/bootstrap/js/bootstrap.bundle.min';
 import data from './data/data';
+import './assets/land-mini-1.jpg';
+import './assets/land-mini-2.jpg';
+import './assets/land-mini-3.jpg';
 import './assets/airabella-logo.png';
 import './assets/acha-logo.png';
 import './assets/arribada-logo.png';
@@ -41,7 +44,7 @@ function printLand(landName, familyId) {
     imageDiv.setAttribute('class', 'col-md-8');
     const img = document.createElement('img');
     img.setAttribute('class', 'img-fluid');
-    img.setAttribute('src', require('./assets/land.jpg'));
+    img.setAttribute('src', require('./assets/land2.png'));
     imageDiv.appendChild(img);
 
     const descDiv = document.createElement('div');
@@ -83,7 +86,7 @@ function printLand(landName, familyId) {
 
     const carouselRow = document.createElement('div');
     carouselRow.setAttribute('class', 'row');
-    similarLands.forEach(similarLand => {
+    similarLands.forEach((similarLand, i) => {
         const carouselCol = document.createElement('div');
         carouselCol.setAttribute('class', 'col-md-4');
         const carouselLandLink = document.createElement('a');
@@ -93,8 +96,9 @@ function printLand(landName, familyId) {
         const carouselImage = document.createElement('img');
         carouselLandLink.appendChild(carouselImage);
         carouselLandLink.appendChild(carouselLandName);
-        carouselImage.setAttribute('src', require('./assets/land.jpg'));
+        carouselImage.setAttribute('src', require('./assets/land-mini-' + (i + 1) + '.jpg'));
         carouselImage.setAttribute('alt', similarLand);
+        carouselImage.setAttribute('class', 'img-fluid mh-75');
         carouselImage.setAttribute('style', 'max-width: 100%');
         carouselCol.appendChild(carouselLandLink);
         carouselRow.appendChild(carouselCol);
@@ -116,7 +120,7 @@ function createLandHtml(land, familyId) {
     portfolio.setAttribute('class', 'portfolio-item mx-auto');
     const image = document.createElement('img');
     image.setAttribute('class', 'img-fluid');
-    image.setAttribute('src', require('./assets/land.jpg'));
+    image.setAttribute('src', require('./assets/land-mini-1.jpg'));
     image.setAttribute('alt', 'Family image');
     const landName = document.createElement('p');
     landName.innerText = land;
