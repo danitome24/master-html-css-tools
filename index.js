@@ -3,6 +3,9 @@ import 'startbootstrap-freelancer/vendor/jquery/jquery.min';
 import 'startbootstrap-freelancer/vendor/jquery-easing/jquery.easing.min';
 import 'startbootstrap-freelancer/vendor/bootstrap/js/bootstrap.bundle.min';
 import data from './data/data';
+import './assets/land-mini-1.jpg';
+import './assets/land-mini-2.jpg';
+import './assets/land-mini-3.jpg';
 import './assets/airabella-logo.png';
 import './assets/acha-logo.png';
 import './assets/arribada-logo.png';
@@ -39,10 +42,22 @@ function printLand(landName, familyId) {
 
     const imageDiv = document.createElement('div');
     imageDiv.setAttribute('class', 'col-md-8');
-    const img = document.createElement('img');
-    img.setAttribute('class', 'img-fluid');
-    img.setAttribute('src', require('./assets/land.jpg'));
-    imageDiv.appendChild(img);
+    const pictureElement = document.createElement('picture');
+    const firstSourceElement = document.createElement('source');
+    firstSourceElement.setAttribute('media', '(min-width: 769px)');
+    firstSourceElement.setAttribute('class', 'img-fluid');
+    firstSourceElement.setAttribute('srcset', require('./assets/land2.png'));
+    const secondSourceElement = document.createElement('source');
+    secondSourceElement.setAttribute('media', '(max-width: 768px)');
+    secondSourceElement.setAttribute('class', 'img-fluid');
+    secondSourceElement.setAttribute('srcset', require('./assets/land2-mini.png'));
+    const fallbackImage = document.createElement('img');
+    fallbackImage.setAttribute('class', 'img-fluid');
+    fallbackImage.setAttribute('src', require('./assets/land2.png'));
+    pictureElement.appendChild(firstSourceElement);
+    pictureElement.appendChild(secondSourceElement);
+    pictureElement.appendChild(fallbackImage);
+    imageDiv.appendChild(pictureElement);
 
     const descDiv = document.createElement('div');
     descDiv.setAttribute('class', 'col-md-4');
@@ -83,7 +98,7 @@ function printLand(landName, familyId) {
 
     const carouselRow = document.createElement('div');
     carouselRow.setAttribute('class', 'row');
-    similarLands.forEach(similarLand => {
+    similarLands.forEach((similarLand, i) => {
         const carouselCol = document.createElement('div');
         carouselCol.setAttribute('class', 'col-md-4');
         const carouselLandLink = document.createElement('a');
@@ -93,8 +108,9 @@ function printLand(landName, familyId) {
         const carouselImage = document.createElement('img');
         carouselLandLink.appendChild(carouselImage);
         carouselLandLink.appendChild(carouselLandName);
-        carouselImage.setAttribute('src', require('./assets/land.jpg'));
+        carouselImage.setAttribute('src', require('./assets/land-mini-' + (i + 1) + '.jpg'));
         carouselImage.setAttribute('alt', similarLand);
+        carouselImage.setAttribute('class', 'img-fluid mh-75');
         carouselImage.setAttribute('style', 'max-width: 100%');
         carouselCol.appendChild(carouselLandLink);
         carouselRow.appendChild(carouselCol);
@@ -113,10 +129,10 @@ function createLandHtml(land, familyId) {
     column.setAttribute('class', 'col-md-6 col-lg-4');
 
     const portfolio = document.createElement('div');
-    portfolio.setAttribute('class', 'portfolio-item mx-auto');
+    portfolio.setAttribute('class', 'portfolio-item mx-auto text-translation');
     const image = document.createElement('img');
     image.setAttribute('class', 'img-fluid');
-    image.setAttribute('src', require('./assets/land.jpg'));
+    image.setAttribute('src', require('./assets/land-mini-1.jpg'));
     image.setAttribute('alt', 'Family image');
     const landName = document.createElement('p');
     landName.innerText = land;
@@ -130,8 +146,9 @@ function createLandHtml(land, familyId) {
 
     const portfolioItemCaptionContent = document.createElement('div');
     portfolioItemCaptionContent.setAttribute('class', 'portfolio-item-caption-content text-center text-white');
-    const icon = document.createElement('i');
-    icon.setAttribute('class', 'fas fa-link fa-3x');
+    const icon = document.createElement('p');
+    icon.setAttribute('class', 'text-bounce');
+    icon.innerText = land;
     portfolioItemCaptionContent.appendChild(icon);
 
     portfolioItemCaption.appendChild(portfolioItemCaptionContent);
