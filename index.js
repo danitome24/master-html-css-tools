@@ -42,10 +42,22 @@ function printLand(landName, familyId) {
 
     const imageDiv = document.createElement('div');
     imageDiv.setAttribute('class', 'col-md-8');
-    const img = document.createElement('img');
-    img.setAttribute('class', 'img-fluid');
-    img.setAttribute('src', require('./assets/land2.png'));
-    imageDiv.appendChild(img);
+    const pictureElement = document.createElement('picture');
+    const firstSourceElement = document.createElement('source');
+    firstSourceElement.setAttribute('media', '(min-width: 769px)');
+    firstSourceElement.setAttribute('class', 'img-fluid');
+    firstSourceElement.setAttribute('srcset', require('./assets/land2.png'));
+    const secondSourceElement = document.createElement('source');
+    secondSourceElement.setAttribute('media', '(max-width: 768px)');
+    secondSourceElement.setAttribute('class', 'img-fluid');
+    secondSourceElement.setAttribute('srcset', require('./assets/land2-mini.png'));
+    const fallbackImage = document.createElement('img');
+    fallbackImage.setAttribute('class', 'img-fluid');
+    fallbackImage.setAttribute('src', require('./assets/land2.png'));
+    pictureElement.appendChild(firstSourceElement);
+    pictureElement.appendChild(secondSourceElement);
+    pictureElement.appendChild(fallbackImage);
+    imageDiv.appendChild(pictureElement);
 
     const descDiv = document.createElement('div');
     descDiv.setAttribute('class', 'col-md-4');
@@ -117,7 +129,7 @@ function createLandHtml(land, familyId) {
     column.setAttribute('class', 'col-md-6 col-lg-4');
 
     const portfolio = document.createElement('div');
-    portfolio.setAttribute('class', 'portfolio-item mx-auto');
+    portfolio.setAttribute('class', 'portfolio-item mx-auto text-translation');
     const image = document.createElement('img');
     image.setAttribute('class', 'img-fluid');
     image.setAttribute('src', require('./assets/land-mini-1.jpg'));
@@ -134,8 +146,9 @@ function createLandHtml(land, familyId) {
 
     const portfolioItemCaptionContent = document.createElement('div');
     portfolioItemCaptionContent.setAttribute('class', 'portfolio-item-caption-content text-center text-white');
-    const icon = document.createElement('i');
-    icon.setAttribute('class', 'fas fa-link fa-3x');
+    const icon = document.createElement('p');
+    icon.setAttribute('class', 'text-bounce');
+    icon.innerText = land;
     portfolioItemCaptionContent.appendChild(icon);
 
     portfolioItemCaption.appendChild(portfolioItemCaptionContent);
