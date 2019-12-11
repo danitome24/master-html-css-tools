@@ -66,6 +66,10 @@ con los errores que hay en la página actual.
 He hecho el seguimiento de todas las páginas y he eliminado todos y cada uno de los errores que Wave me ha indicado. Por lo tanto,
 el sitio web cumple con las buenas prácticas de accesibilidad.
 
+## Imágenes usadas
+
+Todas las imágenes usadas en esta práctica han sido o creadas por mi o obtenidas de Google imagenes con licencia para reutilización.
+
 ### Deploy en producción
 
 Para deployear el proyecto y tenerlo listo para producción simplemente deberemos cambiar el comando en el fichero `docker-compose.yml`
