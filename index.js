@@ -55,6 +55,7 @@ function printLand(landName, familyId) {
     const fallbackImage = document.createElement('img');
     fallbackImage.setAttribute('class', 'img-fluid');
     fallbackImage.setAttribute('src', require('./assets/land2.png'));
+    fallbackImage.setAttribute('alt', landName + ' picture');
     pictureElement.appendChild(firstSourceElement);
     pictureElement.appendChild(secondSourceElement);
     pictureElement.appendChild(fallbackImage);
@@ -176,6 +177,7 @@ function createFamilyHtml(familyData) {
 
     const link = document.createElement('a');
     link.setAttribute('href', '?family=' + familyData.id);
+    link.innerHTML = '<span class="sr-only">Go to family</span>';
     const portfolioItemCaption = document.createElement('div');
     portfolioItemCaption.setAttribute('class', 'portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100');
 
