@@ -6,6 +6,7 @@ import data from './data/data';
 import './assets/land-mini-1.jpg';
 import './assets/land-mini-2.jpg';
 import './assets/land-mini-3.jpg';
+import './assets/land-mini-1-380w.jpg';
 import './assets/airabella-logo.png';
 import './assets/acha-logo.png';
 import './assets/arribada-logo.png';
@@ -54,6 +55,7 @@ function printLand(landName, familyId) {
     const fallbackImage = document.createElement('img');
     fallbackImage.setAttribute('class', 'img-fluid');
     fallbackImage.setAttribute('src', require('./assets/land2.png'));
+    fallbackImage.setAttribute('alt', landName + ' picture');
     pictureElement.appendChild(firstSourceElement);
     pictureElement.appendChild(secondSourceElement);
     pictureElement.appendChild(fallbackImage);
@@ -104,6 +106,7 @@ function printLand(landName, familyId) {
         const carouselLandLink = document.createElement('a');
         carouselLandLink.setAttribute('href', '?land=' + similarLand + '&family=' + familyId);
         const carouselLandName = document.createElement('p');
+        carouselLandName.setAttribute('style', 'color: black');
         carouselLandName.innerText = similarLand;
         const carouselImage = document.createElement('img');
         carouselLandLink.appendChild(carouselImage);
@@ -132,6 +135,8 @@ function createLandHtml(land, familyId) {
     portfolio.setAttribute('class', 'portfolio-item mx-auto text-translation');
     const image = document.createElement('img');
     image.setAttribute('class', 'img-fluid');
+    let srcSet = require('./assets/land-mini-1.jpg') + ' 1138w, ' + require('./assets/land-mini-1-380w.jpg') + ' 380w';
+    image.setAttribute('srcset', srcSet);
     image.setAttribute('src', require('./assets/land-mini-1.jpg'));
     image.setAttribute('alt', 'Family image');
     const landName = document.createElement('p');
@@ -173,6 +178,7 @@ function createFamilyHtml(familyData) {
 
     const link = document.createElement('a');
     link.setAttribute('href', '?family=' + familyData.id);
+    link.innerHTML = '<span class="sr-only">Go to family</span>';
     const portfolioItemCaption = document.createElement('div');
     portfolioItemCaption.setAttribute('class', 'portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100');
 
