@@ -15,11 +15,41 @@ crear, online, polígonos clip-path vía clics y puntos.
 
 ### Imagen destacada
 
+En la PEC-1 ya introduje una imagen destacada del terreno y en esta práctica lo que he hecho ha sido tratarla con dirección de arte,
+para ello he creado dos imágenes principales llamadas: `land2.png` i `land2-mini.png`. La primera imagen (grande) se mostrará en pantallas con 
+mayor anchura de 769px i la segunda se mostrará cuando la anchura es menor a 768px.
+
+El formato de esta imagen es en `.png` ya que la imagen principal de la página debe tener una buena resolución.
+
 ### Otras imágenes
+
+Como en la imagen destacada, en la PEC-1 también añadí tres imagenes de tierras similares. Estas imágenes las he creado en formato 
+`.jpg` ya que al ser imágenes más pequeñas, no requiren de tanta resolución.
 
 ## Página de categoría
 
+En la página de categoría (en mi caso es el listado de tierras de una família), también tenía hecho de la práctica anterior que por cada tierra se
+muestre una imagen. Para estas imágenes he usado la técnica de responsive. He creado dos imágenes una: `land-mini-1.jpg` y `land-mini-1-380w.jpg`.
+La primera con una anchura de 1138px de ancho y la segunda 380 px.
+
+![image responsive](../assets/docs/image-responsive-380w.png)
+
+![image responsive](../assets/docs/image-responsive-full.png)
+
 ## Responsive
+
+Al usar una plantilla basada en Bootstrap y usar el mismo framework para los estilos, que la página sea responsive ya va por defecto. 
+Igualmente, tal y como he mencionado antes, he usado técnicas de imágenes responsive y compresión de imágenes gracias a imagemin.
+
+## Animaciones
+
+He integrado dos animaciones a la página: una en el título 
+
+![title animation](../assets/docs/animation1.gif)
+
+y otra animación en el footer con el listado de famílias más visitadas.
+
+![footer animation](../assets/docs/animation-footer.gif)
 
 ## Accesibilidad
 
