@@ -6,6 +6,7 @@ import data from './data/data';
 import './assets/land-mini-1.jpg';
 import './assets/land-mini-2.jpg';
 import './assets/land-mini-3.jpg';
+import './assets/land-mini-1-380w.jpg';
 import './assets/airabella-logo.png';
 import './assets/acha-logo.png';
 import './assets/arribada-logo.png';
@@ -132,6 +133,8 @@ function createLandHtml(land, familyId) {
     portfolio.setAttribute('class', 'portfolio-item mx-auto text-translation');
     const image = document.createElement('img');
     image.setAttribute('class', 'img-fluid');
+    let srcSet = require('./assets/land-mini-1.jpg') + ' 1138w, ' + require('./assets/land-mini-1-380w.jpg') + ' 380w';
+    image.setAttribute('srcset', srcSet);
     image.setAttribute('src', require('./assets/land-mini-1.jpg'));
     image.setAttribute('alt', 'Family image');
     const landName = document.createElement('p');
