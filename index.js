@@ -106,6 +106,7 @@ function printLand(landName, familyId) {
         const carouselLandLink = document.createElement('a');
         carouselLandLink.setAttribute('href', '?land=' + similarLand + '&family=' + familyId);
         const carouselLandName = document.createElement('p');
+        carouselLandName.setAttribute('style', 'color: black');
         carouselLandName.innerText = similarLand;
         const carouselImage = document.createElement('img');
         carouselLandLink.appendChild(carouselImage);
