@@ -43,13 +43,17 @@ Igualmente, tal y como he mencionado antes, he usado técnicas de imágenes resp
 
 ## Animaciones
 
-He integrado dos animaciones a la página: una en el título 
+He integrado tres animaciones a la página: una en el título 
 
 ![title animation](../assets/docs/animation1.gif)
 
-y otra animación en el footer con el listado de famílias más visitadas.
+ otra animación en el footer con el listado de famílias más visitadas.
 
 ![footer animation](../assets/docs/animation-footer.gif)
+
+y otra en las imágenes del listado de tierras
+
+![land name animation](../assets/docs/animation-3.gif) 
 
 ## Accesibilidad
 
