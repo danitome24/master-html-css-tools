@@ -77,9 +77,10 @@ Todas las imágenes usadas en esta práctica han sido o creadas por mi o obtenid
 Para deployear el proyecto y tenerlo listo para producción simplemente deberemos cambiar el comando en el fichero `docker-compose.yml`
 y donde ponga `npm run dev` hay que poner `npm run build`. Esto nos generará los JS, CSS y HTML preparados para subir a nuestro servidor de producción.
 
-### URL pública
+### Repositorio y URL pública
 
-* https://dtome24uoc.netlify.com/
+* Podemos encontrar el proyecto en [Github](https://github.com/danitome24/master-html-css-tools)
+* Url pública de la web: https://dtome24uoc.netlify.com/
 
 ### Autor
 
