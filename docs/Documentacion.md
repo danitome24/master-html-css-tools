@@ -15,6 +15,7 @@ crear, online, polígonos clip-path vía clics y puntos.
 
 ### Imagen destacada
 
+
 En la PEC-1 ya introduje una imagen destacada del terreno y en esta práctica lo que he hecho ha sido tratarla con dirección de arte,
 para ello he creado dos imágenes principales llamadas: `land2.png` i `land2-mini.png`. La primera imagen (grande) se mostrará en pantallas con 
 mayor anchura de 769px i la segunda se mostrará cuando la anchura es menor a 768px.
@@ -69,6 +70,7 @@ el sitio web cumple con las buenas prácticas de accesibilidad.
 ## Imágenes usadas
 
 Todas las imágenes usadas en esta práctica han sido o creadas por mi o obtenidas de Google imagenes con licencia para reutilización.
+
 
 ### Deploy en producción
 
