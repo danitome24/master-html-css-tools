@@ -67,6 +67,11 @@ Para cargar solamente aquello que uso lo haré de la siguiente forma en el <head
     <link href="node_modules/@fortawesome/fontawesome-free/css/brands.min.css" rel="stylesheet" type="text/css">
 ```
 
+Una vez tenemos estas mejoras hechas si volvemos a ejecutar el Google PageSpeed Insight podemos ver mejoras en el porcentaje final.
+
+![Mejoras movil](../assets/docs/Improves-mobile.png)
+
+![Mejoras pc](../assets/docs/improves-pc.png)
 
 ### Repositorio y URL pública
 
