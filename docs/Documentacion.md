@@ -52,7 +52,20 @@ Con esta mejora, si volvemos a revisar la herramienta de Chrome para la red pode
 
 ![Union fonts image](../assets/docs/network-union-fonts.png)
 
-Lo siguiente a revisar de fuentes son los ficheros de FontAwesome  (fa-*) 
+Lo siguiente a revisar de fuentes son los ficheros de FontAwesome  (fa-*). He podido ver que tenemos dos ficheros de 
+fuentes que se nos descargan: Los encargados de los iconos sociales (Twitter, Facebook, etc) y los iconos sólidos (para 
+la estrella situada debajo del título Familias). Creo que mantener un fichero de iconos para una simple estrella no es lógico,
+así que optaré por cambiar este icono. En la [documentación de FontAwesome](https://fontawesome.com/how-to-use/on-the-web/setup/hosting-font-awesome-yourself#using-certain-styles)
+podemos ver un ejemplo de como cargar solamente ciertos estilos que usemos. Por lo tanto los cambios que haré serán:
+* Modificar el icono de la estrella por otro (o eliminarlo).
+* Cargar solamente lo necesario.
+
+
+Para cargar solamente aquello que uso lo haré de la siguiente forma en el <head>:
+```html
+    <link href="node_modules/@fortawesome/fontawesome-free/css/fontawesome.min.css" rel="stylesheet" type="text/css">
+    <link href="node_modules/@fortawesome/fontawesome-free/css/brands.min.css" rel="stylesheet" type="text/css">
+```
 
 
 ### Repositorio y URL pública
