@@ -13,12 +13,9 @@ El primer test de PageSpeed Insights nos da unas marcas de:
 ![Test de ordenador](../assets/docs/pagespeed-pc-1.png)
 
 Como podemos ver, para ordenador tenemos un muy buen valor de rendimiento de la página web. Veremos más adelante si podemos 
-mejorarlo para obtener el 100%. En cambio, para móvil, tenemos márgen de mejora ya que el actual valor es de 86%. Si miramos 
-los datos que nos proporciona Insights i sus oportunidades vemos:
+mejorarlo para obtener el 100%. En cambio, para móvil, tenemos márgen de mejora ya que el actual valor es de 76%.
 
-![Datos de movil mejorables](../assets/docs/pagespeed-mobile-2.png)
-
-Podemos ver que los valores relacionados con el tiempo que pasa des de que hacemos la petición hasta que vemos algo está en naranja.
+También en el apartado móvil podemos ver que los valores relacionados con el tiempo que pasa desde que hacemos la petición hasta que vemos algo está en naranja.
 Esto nos indica que el tiempo de espera para que el usuario pueda ver algo en el navegador es moderado y que, por lo tanto, 
 podemos mejorar este tiempo para que el usuario no tenga la sensación de que la web va lenta o no le carga. 
 
@@ -49,6 +46,14 @@ las fuentes, quedándonos algo tal que:
 ```html
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 ```
+
+Con esta mejora, si volvemos a revisar la herramienta de Chrome para la red podemos ver que hemos conseguido bajar de 
+200ms cada petición y 1KB aproximado de descarga a 60ms y 700KB.
+
+![Union fonts image](../assets/docs/network-union-fonts.png)
+
+Lo siguiente a revisar de fuentes son los ficheros de FontAwesome  (fa-*) 
+
 
 ### Repositorio y URL pública
 
