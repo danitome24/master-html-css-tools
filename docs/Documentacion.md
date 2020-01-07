@@ -1,81 +1,54 @@
-## PEC 2
+## PEC 3
 
-## Logotipo
+### Test de Google PageSpeed Insights
 
-El logotipo lo he creado con la herramienta online [hatchful](https://hatchful.shopify.com/). Ya que la temática de esta página
-web va sobre tierras, pues en el logo se me ha ocurrido incorporar árboles para referenciar a la parte de la naturaleza.
+El primer test de PageSpeed Insights nos da unas marcas de:
 
-## Imagen editada con clip-path
+* En móvil:
 
-He integrado el logo en el footer editado con clip-path. La forma que he creado ha sido un polígono de siete lados donde la base
-es el lado más largo. Para crear este polígono he usado la herramienta [clippy](https://bennettfeely.com/clippy/) que me ayuda a 
-crear, online, polígonos clip-path vía clics y puntos.
+![Test de móvil](../assets/docs/pagespeed-mobile-1.png)
 
-## Página de detalle
+* En ordenador:
 
-### Imagen destacada
+![Test de ordenador](../assets/docs/pagespeed-pc-1.png)
 
+Como podemos ver, para ordenador tenemos un muy buen valor de rendimiento de la página web. Veremos más adelante si podemos 
+mejorarlo para obtener el 100%. En cambio, para móvil, tenemos márgen de mejora ya que el actual valor es de 86%. Si miramos 
+los datos que nos proporciona Insights i sus oportunidades vemos:
 
-En la PEC-1 ya introduje una imagen destacada del terreno y en esta práctica lo que he hecho ha sido tratarla con dirección de arte,
-para ello he creado dos imágenes principales llamadas: `land2.png` i `land2-mini.png`. La primera imagen (grande) se mostrará en pantallas con 
-mayor anchura de 769px i la segunda se mostrará cuando la anchura es menor a 768px.
+![Datos de movil mejorables](../assets/docs/pagespeed-mobile-2.png)
 
-El formato de esta imagen es en `.png` ya que la imagen principal de la página debe tener una buena resolución.
+Podemos ver que los valores relacionados con el tiempo que pasa des de que hacemos la petición hasta que vemos algo está en naranja.
+Esto nos indica que el tiempo de espera para que el usuario pueda ver algo en el navegador es moderado y que, por lo tanto, 
+podemos mejorar este tiempo para que el usuario no tenga la sensación de que la web va lenta o no le carga. 
 
-### Otras imágenes
+También podemos ver en la herramienta de desarrolladores de Chrome lo siguiente:
 
-Como en la imagen destacada, en la PEC-1 también añadí tres imagenes de tierras similares. Estas imágenes las he creado en formato 
-`.jpg` ya que al ser imágenes más pequeñas, no requiren de tanta resolución.
+![Herramienta de Chrome network](../assets/docs/pagespeed-mobile-network.png)
 
-## Página de categoría
+Aquí vemos que primero se cargan los CSS, los ficheros JS necesarios para la web y algunas imagenes. Podemos apreciar que
+cuando cargamos las fuentes (fa-brands y fa-solid) ek tuenoi qye tarda es de los más elevados. Quizás por este lado podamos
+recortar tiempo eliminando las fuentes o viendo si realmente son necesarias. También podemos ver que estamos descargando múltiples 
+ficheros CSS de la web. Aquí también podemos ver si uniéndolos y minificandolos podemos ganar algo de tiempo.
 
-En la página de categoría (en mi caso es el listado de tierras de una família), también tenía hecho de la práctica anterior que por cada tierra se
-muestre una imagen. Para estas imágenes he usado la técnica de responsive. He creado dos imágenes una: `land-mini-1.jpg` y `land-mini-1-380w.jpg`.
-La primera con una anchura de 1138px de ancho y la segunda 380 px.
+### Primera iteración
 
-![image responsive](../assets/docs/image-responsive-380w.png)
+En la primera iteración vamos a revisar los ficheros de fuentes usados por nuestra web y a intentar reducir el coste que nos supone
+el tenerlos.
 
-![image responsive](../assets/docs/image-responsive-full.png)
+Si revisamos el `index.html` podemos ver que tenemos dos peticiones a las fuentes de Google:
 
-## Responsive
+```html
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+```
 
-Al usar una plantilla basada en Bootstrap y usar el mismo framework para los estilos, que la página sea responsive ya va por defecto. 
-Igualmente, tal y como he mencionado antes, he usado técnicas de imágenes responsive y compresión de imágenes gracias a imagemin.
+Una forma de optimizar estas dos peticiones es uniéndolas en una única. Para ello podemos usar la pipe en el nombre de 
+las fuentes, quedándonos algo tal que:
 
-## Animaciones
-
-He integrado tres animaciones a la página: una en el título 
-
-![title animation](../assets/docs/animation1.gif)
-
- otra animación en el footer con el listado de famílias más visitadas.
-
-![footer animation](../assets/docs/animation-footer.gif)
-
-y otra en las imágenes del listado de tierras
-
-![land name animation](../assets/docs/animation-3.gif) 
-
-## Accesibilidad
-
-La gestión del proyecto de accesibilidad la he revisado con el plugin de Chrome [Wave Evaluation Tool](http://wave.webaim.org/). He usado un plugin
-dada su facilidad de uso en el desarrollo. Sencillamente con activarlo en la página que estoy visitando me muestra un report
-con los errores que hay en la página actual. 
-
-![ejemplo del uso de Wave](../assets/docs/waveaccessibility.png)
-
-He hecho el seguimiento de todas las páginas y he eliminado todos y cada uno de los errores que Wave me ha indicado. Por lo tanto,
-el sitio web cumple con las buenas prácticas de accesibilidad.
-
-## Imágenes usadas
-
-Todas las imágenes usadas en esta práctica han sido o creadas por mi o obtenidas de Google imagenes con licencia para reutilización.
-
-
-### Deploy en producción
-
-Para deployear el proyecto y tenerlo listo para producción simplemente deberemos cambiar el comando en el fichero `docker-compose.yml`
-y donde ponga `npm run dev` hay que poner `npm run build`. Esto nos generará los JS, CSS y HTML preparados para subir a nuestro servidor de producción.
+```html
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+```
 
 ### Repositorio y URL pública
 
