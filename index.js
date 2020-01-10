@@ -184,8 +184,9 @@ function createFamilyHtml(familyData) {
 
     const portfolioItemCaptionContent = document.createElement('div');
     portfolioItemCaptionContent.setAttribute('class', 'portfolio-item-caption-content text-center text-white');
-    const icon = document.createElement('i');
-    icon.setAttribute('class', 'fas fa-link fa-3x');
+    const icon = document.createElement('span');
+    icon.setAttribute('class', 'h1');
+    icon.innerText = "+";
     portfolioItemCaptionContent.appendChild(icon);
 
     portfolioItemCaption.appendChild(portfolioItemCaptionContent);

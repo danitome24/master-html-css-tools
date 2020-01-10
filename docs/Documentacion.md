@@ -73,6 +73,14 @@ Una vez tenemos estas mejoras hechas si volvemos a ejecutar el Google PageSpeed 
 
 ![Mejoras pc](../assets/docs/improves-pc.png)
 
+### Segunda iteración
+
+En esta segunda iteracióm lo que voy a hacer va a ser unir los ficheros dos ficheros CSS que tenemos en nuestra web con 
+objetivo de que se descargue un único fichero. El primero (freelancer.min.css) corresponde al fichero ya minificado de la plantilla
+HTML que he usado y el segundo (override.css) son pequeños ajustes que he hecho para que la plantilla esté a mi gusto. 
+
+Para
+
 ### Repositorio y URL pública
 
 * Podemos encontrar el proyecto en [Github](https://github.com/danitome24/master-html-css-tools)
