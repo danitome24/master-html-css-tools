@@ -13,7 +13,7 @@ El primer test de PageSpeed Insights nos da unas marcas de:
 ![Test de ordenador](../assets/docs/pagespeed-pc-1.png)
 
 Como podemos ver, para ordenador tenemos un muy buen valor de rendimiento de la página web. Veremos más adelante si podemos 
-mejorarlo para obtener el 100%. En cambio, para móvil, tenemos márgen de mejora ya que el actual valor es de 76%.
+mejorarlo para obtener el 100%. En cambio, para móvil, tenemos margen de mejora ya que el actual valor es de 76%.
 
 También en el apartado móvil podemos ver que los valores relacionados con el tiempo que pasa desde que hacemos la petición hasta que vemos algo está en naranja.
 Esto nos indica que el tiempo de espera para que el usuario pueda ver algo en el navegador es moderado y que, por lo tanto, 
@@ -23,8 +23,8 @@ También podemos ver en la herramienta de desarrolladores de Chrome lo siguiente
 
 ![Herramienta de Chrome network](../assets/docs/pagespeed-mobile-network.png)
 
-Aquí vemos que primero se cargan los CSS, los ficheros JS necesarios para la web y algunas imagenes. Podemos apreciar que
-cuando cargamos las fuentes (fa-brands y fa-solid) ek tuenoi qye tarda es de los más elevados. Quizás por este lado podamos
+Aquí vemos que primero se cargan los CSS, los ficheros JS necesarios para la web y algunas imágenes. Podemos apreciar que
+cuando cargamos las fuentes (fa-brands y fa-solid) el tiempo que tarda es de los más elevados. Quizás por este lado podamos
 recortar tiempo eliminando las fuentes o viendo si realmente son necesarias. También podemos ver que estamos descargando múltiples 
 ficheros CSS de la web. Aquí también podemos ver si uniéndolos y minificandolos podemos ganar algo de tiempo.
 
@@ -75,7 +75,7 @@ Una vez tenemos estas mejoras hechas si volvemos a ejecutar el Google PageSpeed 
 
 ### Segunda iteración
 
-En esta segunda iteracióm lo que voy a hacer va a ser unir los ficheros dos ficheros CSS que tenemos en nuestra web con 
+En esta segunda iteración lo que voy a hacer va a ser unir los ficheros dos ficheros CSS que tenemos en nuestra web con 
 objetivo de que se descargue un único fichero. El primero (freelancer.min.css) corresponde al fichero ya minificado de la plantilla
 HTML que he usado y el segundo (override.css) son pequeños ajustes que he hecho para que la plantilla esté a mi gusto. 
 
